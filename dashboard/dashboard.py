@@ -10,16 +10,22 @@ def load_data():
 
 day = load_data()
 
-st.title("Proyek Analisis Data : Bike Sharing")
+st.title("Project Analisis Data : Bike Sharing")
+
 st.markdown("""
+            
 - **Nama:** Muhammad Faqih
 - **Email:** faqihtelco@gmail.com
 - **ID Dicoding:** muhammad_faqih_kmwq
+            
 """)
+
 st.header("Business Questions")
 st.markdown("""
+            
 - Question 1 : Pada musim apa penyewaan sepeda paling ramai?
 - Question 2 : Berapa total penyewaan sepeda pada bulan Maret 2012?
+            
 """)
 
 st.subheader("")
@@ -28,10 +34,15 @@ st.write(day.head(15))
 st.write("**Atribut Dataset**")
 
 attributes = """
+
 **Attributes:**
 - **instant**: index
 - **dteday**: bike rental date
-- **season**: season (1:Spring, 2:Summer, 3:Fall, 4:Winter)
+- **season**: season (
+- 1: Spring, 
+- 2: Summer, 
+- 3: Fall, 
+- 4: Winter)
 - **yr**: year (0: 2011, 1:2012)
 - **mnth**: month (1 to 12)
 - **hr**: hour (0 to 23)
@@ -67,7 +78,9 @@ def remove_outliers(df):
     df_filtered = df_numeric[mask.all(axis=1)]
     
     return df[df.index.isin(df_filtered.index)]
+
 day_cleaned = remove_outliers(day)
+
 day['dteday'] = pd.to_datetime(day['dteday'])
 
 st.subheader("Comparison of Bike Rental Trends 2011 & 2012")
@@ -85,12 +98,14 @@ def display_yearly_rental_trend(day):
     st.pyplot(plt)
     
 display_yearly_rental_trend(day)
+
 st.write("From the graph above, we can see that in 2011, from January to May, the number of bicycle rentals increased rapidly, but from October to the end of the year, there was a decline.  ")
 
 
 day_2012 = day[day['yr'] == 1]
 
 st.subheader("Monthly Bike Rental Trends in 2012")
+
 monthly_rental_2012 = day_2012.groupby('mnth')['cnt'].sum()
 
 fig2, ax2 = plt.subplots()
@@ -107,7 +122,7 @@ st.write("If we look further into 2012, a significant increase occurred in Febru
 total_rental_march_2012 = day_2012[day_2012['mnth'] == 3]['cnt'].sum()
 st.write(f"Total bicycle rentals in March 2012: {total_rental_march_2012}")
 
-st.subheader("Total Penyewaan Sepeda Berdasarkan Musim")
+st.subheader("Total Bike Rentals By Season")
 season_counts = day.groupby('season')['cnt'].sum().reset_index()
 
 fig1, ax1 = plt.subplots()
@@ -127,6 +142,8 @@ ramai = season_mapping[ramai_index]
 st.write(f"The season with the busiest bike loans: {ramai}")
 
 st.header("Cnonclutions")
+
 st.write("- Question 1 : Musim dengan penyewaan sepeda paling ramai adalah musim gugur (Fall)")
+
 st.write(f"- Question 2 : Total penyewaan sepeda pada bulan Maret 2012: {total_rental_march_2012}")
 
