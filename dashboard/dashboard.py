@@ -141,7 +141,7 @@ ramai = season_mapping[ramai_index]
 
 st.write(f"The season with the busiest bike loans: {ramai}")
 
-st.header("Cnonclutions")
+st.header("Conclutions")
 
 st.write("- Question 1 : Musim dengan penyewaan sepeda paling ramai adalah musim gugur (Fall)")
 
